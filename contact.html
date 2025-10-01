@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career - Shrote</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  /* General Reset */
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+  body { background: #f8f9fa; color: #111; }
+
+  /* Navbar */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 60px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .logo { font-size: 26px; font-weight: 900; }
+  .logo span { color: #4a6cf7; }
+
+  /* Desktop nav */
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .nav-desktop {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+  .nav-desktop a {
+    text-decoration: none;
+    color: #111;
+    font-weight: 500;
+    transition: 0.3s;
+  }
+  .nav-desktop a:hover { color: #4a6cf7; }
+  .btn { padding: 8px 18px; border: none; border-radius: 25px; background: #007bff; color: #fff; font-weight: 500; cursor: pointer; transition: 0.3s; }
+  .btn:hover { background: #0056b3; }
+
+  /* Hamburger */
+  .hamburger { 
+    display: none; 
+    flex-direction: column; 
+    cursor: pointer; 
+    gap: 5px; 
+    width: 30px;
+    height: 24px;
+    position: relative;
+  }
+  .hamburger span {
+    height: 3px;
+    background: #111;
+    border-radius: 2px;
+    transition: all 0.3s;
+    width: 100%;
+  }
+  
+  /* Mobile Menu */
+  #navMenu {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    background: #fff;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: none;
+    z-index: 999;
+  }
+  #navMenu.show { display: flex; }
+  #navMenu ul {
+    list-style: none;
+    width: 100%;
+    padding-left: 20px;
+  }
+  #navMenu ul li {
+    margin: 15px 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: slideIn 0.4s forwards;
+    width: 100%;
+  }
+  #navMenu ul li a {
+    text-decoration: none;
+    color: #111;
+    font-weight: 500;
+    display: block;
+    padding: 10px 0;
+    transition: color 0.3s;
+  }
+  #navMenu ul li a:hover { color: #4a6cf7; }
+  #navMenu ul li:nth-child(1) { animation-delay: 0.1s; }
+  #navMenu ul li:nth-child(2) { animation-delay: 0.2s; }
+  #navMenu ul li:nth-child(3) { animation-delay: 0.3s; }
+  #navMenu ul li:nth-child(4) { animation-delay: 0.4s; }
+  
+  #navMenu .mobile-btn {
+    margin: 20px;
+    width: calc(100% - 40px);
+  }
+
+  @keyframes slideIn { to { opacity: 1; transform: translateY(0); } }
+
+  /* Section Heading */
+  .heading { text-align: center; margin: 40px auto; font-size: 22px; font-weight: bold; }
+  .heading span { color: #f4b400; }
+  .typing { border-right: 3px solid #f4b400; display: inline-block; animation: blink 0.7s step-end infinite; }
+  @keyframes blink { 50% { border-color: transparent; } }
+
+  /* Contact Section */
+  .contact-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+    max-width: 1100px;
+    margin: auto;
+  }
+  .left-box { flex: 1; background: #2d2d2d; color: #fff; padding: 30px; border-radius: 8px; }
+  .left-box h2 { font-size: 28px; font-weight: bold; text-align: center; margin-bottom: 20px; }
+  .left-box h2 span { color: #007bff; }
+  .left-box hr { border: 0; border-top: 1px solid #ccc; margin-bottom: 25px; }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #3a3a3a;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 10px 0;
+    transition: background 0.3s;
+    text-decoration: none;
+    color: #fff;
+  }
+  .contact-item:hover { background: #4a4a4a; }
+  .contact-item i { margin-right: 10px; }
+
+  .right-box {
+    flex: 1;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .right-box h2 { font-size: 28px; font-weight: bold; margin-bottom: 20px; }
+  .right-box h2 span { color: #007bff; }
+  .right-box hr { border: 0; border-top: 2px solid red; margin-bottom: 20px; }
+  .right-box input, .right-box textarea {
+    width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; font-size: 15px;
+  }
+  .right-box textarea { resize: none; height: 120px; }
+  .right-box button { width: 100%; padding: 12px; border: none; border-radius: 6px; background: #0d1b2a; color: #fff; cursor: pointer; transition: 0.3s; }
+  .right-box button:hover { background: #1b263b; }
+
+  /* Footer */
+  .footer {
+      position: relative;
+      background: linear-gradient(to top, #000, #111);
+      color: #fff;
+      padding: 60px 20px 20px;
+      overflow: hidden;
+    }
+    /* Bubble Layer */
+.bubbles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0; left: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.bubble {
+  position: absolute;
+  bottom: -100px;
+  width: 40px; height: 40px;
+  background: rgba(0, 200, 255, 0.4);
+  border-radius: 50%;
+  animation: rise 10s infinite ease-in;
+  box-shadow: 0 0 20px rgba(0, 200, 255, 0.8);
+}
+
+.bubble:nth-child(1) { left: 10%; width: 20px; height: 20px; animation-duration: 6s; }
+.bubble:nth-child(2) { left: 20%; width: 25px; height: 25px; animation-duration: 8s; }
+.bubble:nth-child(3) { left: 30%; width: 15px; height: 15px; animation-duration: 5s; }
+.bubble:nth-child(4) { left: 40%; width: 30px; height: 30px; animation-duration: 7s; }
+.bubble:nth-child(5) { left: 50%; width: 18px; height: 18px; animation-duration: 9s; }
+.bubble:nth-child(6) { left: 60%; width: 22px; height: 22px; animation-duration: 6.5s; }
+.bubble:nth-child(7) { left: 70%; width: 26px; height: 26px; animation-duration: 8.5s; }
+.bubble:nth-child(8) { left: 80%; width: 35px; height: 35px; animation-duration: 10s; }
+.bubble:nth-child(9) { left: 90%; width: 20px; height: 20px; animation-duration: 7.5s; }
+.bubble:nth-child(10){ left: 95%; width: 28px; height: 28px; animation-duration: 9.5s; }
+
+@keyframes rise {
+  0%   { transform: translateY(0) scale(1); opacity: 0.8; }
+  50%  { opacity: 0.4; transform: translateY(-50vh) scale(1.2); }
+  100% { transform: translateY(-100vh) scale(0.8); opacity: 0;
+  }
+}
+
+    .footer-content {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      z-index: 1;
+    }
+    .footer-content h3 span { color: #00c8ff; }
+    .footer-left, .footer-center, .footer-right { flex: 1; margin: 20px; }
+    .social-icons a {
+      color: #fff;
+      margin-right: 10px;
+      font-size: 20px;
+      transition: color 0.3s;
+    }
+    .social-icons a:hover { color: #00c8ff; }
+    .footer-copy { text-align: center; margin-top: 20px; z-index: 1; position: relative; background: black; }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 20px;
+      }
+      
+      .nav-desktop {
+        display: none;
+      }
+      
+      .hamburger {
+        display: flex;
+      }
+      
+      .contact-container {
+        flex-direction: column;
+        padding: 20px;
+      }
+      
+      .footer-content {
+        flex-direction: column;
+      }
+    }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><span>S</span>hrote</div>
+
+  <!-- Desktop Navigation -->
+  <div class="nav-right">
+    <div class="nav-desktop">
+      <a href="./index.html">Home</a>
+      <a href="./about.html">About</a>
+      <a href="./contact.html">Contact</a>
+      <a href="./career.html">Career</a>
+      <button class="btn">Schedule A Call</button>
+    </div>
+
+    <!-- Hamburger for mobile -->
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="navMenu">
+    <ul>
+      <li><a href="./index.html" onclick="toggleMenu()">Home</a></li>
+      <li><a href="./about.html" onclick="toggleMenu()">About</a></li>
+      <li><a href="./contact.html" onclick="toggleMenu()">Contact</a></li>
+      <li><a href="./career.html" onclick="toggleMenu()">Career</a></li>
+    </ul>
+    <button class="btn mobile-btn">Schedule A Call</button>
+  </nav>
+</header>
+
+<div class="heading">
+  Let's create something amazing together - <br>
+  <span id="typing" class="typing"></span>
+</div>
+
+<div class="contact-container">
+  <div class="left-box">
+    <h2>Get In <span>Touch</span></h2>
+    <hr>
+    <a href="https://wa.me/1234567890" target="_blank" class="contact-item"><i class="fab fa-whatsapp"></i> WhatsApp <i class="fas fa-arrow-right"></i></a>
+    <a href="https://linkedin.com" target="_blank" class="contact-item"><i class="fab fa-linkedin"></i> LinkedIn <i class="fas fa-arrow-right"></i></a>
+    <a href="https://instagram.com" target="_blank" class="contact-item"><i class="fab fa-instagram"></i> Instagram <i class="fas fa-arrow-right"></i></a>
+    <a href="https://facebook.com" target="_blank" class="contact-item"><i class="fab fa-facebook"></i> Facebook <i class="fas fa-arrow-right"></i></a>
+    <a href="https://x.com" target="_blank" class="contact-item"><i class="fab fa-x-twitter"></i> X <i class="fas fa-arrow-right"></i></a>
+  </div>
+
+  <div class="right-box">
+    <h2><span>Connect</span> With Us</h2>
+    <hr>
+    <form>
+      <input type="text" placeholder="Name" required>
+      <input type="email" placeholder="Email" required>
+      <input type="text" placeholder="Contact No." required>
+      <textarea placeholder="Project Brief"></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <!-- Bubble Layer -->
+  <div class="bubbles">
+    <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+    <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+    <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+    <div class="bubble"></div>
+  </div>
+
+  <!-- Footer Content -->
+  <div class="footer-content">
+    <div class="footer-left">
+      <h3><span>S</span>hrote</h3>
+      <p>Elevate your online presence with our expert team's innovative designs and seamless functionality.</p>
+    </div>
+    <div class="footer-center">
+      <h3>Contact Us</h3>
+      <p><i class="fa-solid fa-phone"></i> +91 7667983607</p>
+      <p><i class="fa-solid fa-envelope"></i> info@shrote.com</p>
+    </div>
+    <div class="footer-right">
+      <h3>Follow Us</h3>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Copy -->
+  <div class="footer-copy">
+    <p>© 2025 <strong>Shrote</strong>. All Rights Reserved</p>
+  </div>
+</footer>
+
+<script>
+  const typingElement = document.getElementById("typing");
+  const text = "we're just a message away !!! ";
+  let index = 0;
+  function typeEffect() {
+    if(index < text.length) {
+      typingElement.innerHTML += text.charAt(index);
+      index++;
+      setTimeout(typeEffect, 100);
+    }
+  }
+  window.onload = typeEffect;
+
+  function toggleMenu() {
+    const navMenu = document.getElementById("navMenu");
+    navMenu.classList.toggle("show");
+  }
+  
+  // Close menu when clicking outside
+  document.addEventListener('click', function(event) {
+    const navMenu = document.getElementById('navMenu');
+    const hamburger = document.querySelector('.hamburger');
+    const isClickInsideMenu = navMenu.contains(event.target);
+    const isClickOnHamburger = hamburger.contains(event.target);
+    
+    if (!isClickInsideMenu && !isClickOnHamburger && navMenu.classList.contains('show')) {
+      navMenu.classList.remove('show');
+    }
+  });
+</script>
+</body>
+</html>
